@@ -1,14 +1,19 @@
 {
   "version": 2,
-  "functions": {
-    "api/events.js": {
-      "runtime": "nodejs18.x"
+  "builds": [
+    {
+      "src": "api/**/*.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "public/**/*",
+      "use": "@vercel/static"
     }
-  },
+  ],
   "routes": [
     {
-      "src": "/api/events",
-      "dest": "/api/events.js"
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
     },
     {
       "src": "/cro-script.js",
@@ -16,7 +21,7 @@
     },
     {
       "src": "/",
-      "dest": "/api/events.js"
+      "dest": "/api/events"
     }
   ]
 }
